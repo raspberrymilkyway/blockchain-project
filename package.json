@@ -1,0 +1,19 @@
+{
+  "name": "blockchain-project",
+  "version": "1.0.0",
+  "description": "Project for my Blockchain 5576 class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^2.22.13"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "ethers": "^6.13.4"
+  }
+}
