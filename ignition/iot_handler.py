@@ -1,26 +1,39 @@
-import iot_simulator
+import iot_simulator as sim
+import iot_filter as filter
 
-def gen(filename="generated.jsonl"):
-    # get number of times to generate
-    ct = input("Number of times data should be generated: ")
-    while True:
-        try:
-            ct = int(ct)
-            break
-        except:
-            ct = input("Number of times data should be generated: ")
 
-    # anyway, generate and send data
-    # alter this based on current needs!
-    dg = iot_simulator.IoTSimulator()
-    f = open(filename, "a")
+
+def gen():
+    ct = 50
+
+    dg = sim.IoTSimulator()
+    curr_herb = []
+    herb_spray = False
+    curr_insect = []
+    insect_spray = False
+    curr_fungi = []
+    fungi_spray = False
+    curr_fert = []
+    fert_spray = False
     for x in range(ct):
         out = []
-        out.append(dg.sensor(True, True, True))
-        out.append(dg.timer(True, True))
-        out.append(dg.monitor(True, True))
-        f.write("{" + str(out[0]) + ", " + str(out[1]) + ", " + str(out[2]) + "}\n")
-    f.close()
-    print(dg.used_ids)
+        out.append(dg.timer(herbicide=True))
+        curr = filter.herbicide_filter(out[0])
+        if curr != None:
+            print(curr)
+            curr_herb.append(curr)
+            herb_spray = True
+        elif herb_spray:
+            herb_spray = False
+            print(filter.chemical_sum(curr_herb))
+            curr_herb = []
+            print("\n")
+        if herb_spray and x == ct-1:
+            herb_spray = False
+            print(filter.chemical_sum(curr_herb))
+            curr_herb = []
+            print("\n")
 
-gen(input("File name: ")+".jsonl")
+    # print(dg.used_ids)
+
+gen()
