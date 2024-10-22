@@ -13,7 +13,10 @@ class DataGenerator:
         self.used_ids = []
         self.sensor_ids = []
         self.timer_ids = []
-        self.chemical_ids = []
+        self.fertilizer_ids = []
+        self.fungicide_ids = []
+        self.herbicide_ids = []
+        self.insecticide_ids = []
         self.monitor_ids = []
         
         self.fungicide_timer = 0
@@ -70,12 +73,11 @@ class DataGenerator:
                 if ret["herbicide?"]:
                     self.herbicide_timer = 9 #continue spraying for 10 rounds
                     self.herbicide_flag = True
-                    self.herbicide_index = len(self.chemical_ids)
                     ret["spray herbicide"] = self.__spray_pesticide("herbicide")
             else:
                 self.herbicide_timer -= 1
                 ret["herbicide?"] = True
-                ret["spray herbicide"] = self.__spray_pesticide("herbicide")
+                ret["spray herbicide"] = self.__spray_pesticide("herbicide", self.herbicide_ids[self.herbicide_index])
 
         if insecticide:
             if self.insecticide_timer == 0:
@@ -85,12 +87,11 @@ class DataGenerator:
                 if ret["insecticide?"]:
                     self.insecticide_timer = 9
                     self.insecticide_flag = True
-                    self.insecticide_index = len(self.chemical_ids)
                     ret["spray insecticide"] = self.__spray_pesticide("insecticide")
             else:
                 self.insecticide_timer -= 1
                 ret["insecticide?"] = True
-                ret["spray insecticide"] = self.__spray_pesticide("insecticide")
+                ret["spray insecticide"] = self.__spray_pesticide("insecticide", self.insecticide_ids[self.insecticide_index])
 
         if fungicide:
             if self.fungicide_timer == 0:
@@ -100,12 +101,11 @@ class DataGenerator:
                 if ret["fungicide?"]:
                     self.fungicide_timer = 9
                     self.fungicide_flag = True
-                    self.fungicide_index = len(self.chemical_ids)
                     ret["spray fungicide"] = self.__spray_pesticide("fungicide")
             else:
                 self.fungicide_timer -= 1
                 ret["fungicide?"] = True
-                ret["spray fungicide"] = self.__spray_pesticide("fungicide")
+                ret["spray fungicide"] = self.__spray_pesticide("fungicide", self.fungicide_ids[self.fungicide_index])
 
         if fertilizer: #lol fertilizer would likely not work like this
             if self.fertilizer_timer == 0:
@@ -115,12 +115,11 @@ class DataGenerator:
                 if ret["fertilizer?"]:
                     self.fertilizer_timer = 9
                     self.fertilizer_flag = True
-                    self.fertilizer_index = len(self.chemical_ids)
                     ret["place fertilizer"] = self.__use_fertilizer()
             else:
                 self.fertilizer_timer -= 1
                 ret["fertilizer?"] = True
-                ret["use fertilizer"] = self.__use_fertilizer()
+                ret["use fertilizer"] = self.__use_fertilizer(self.fertilizer_ids[self.fertilizer_index])
         
         return ret
 
@@ -128,7 +127,15 @@ class DataGenerator:
     def __spray_pesticide(self, pesticide_type, id=""):
         if id == "":
             id = self.__gen_id()
-            self.chemical_ids.append(id)
+            if (pesticide_type == "herbicide"):
+                self.herbicide_ids.append(id)
+                self.herbicide_index = len(self.herbicide_ids) - 1
+            elif (pesticide_type == "insecticide"):
+                self.insecticide_ids.append(id)
+                self.insecticide_index = len(self.insecticide_ids) - 1
+            else:
+                self.fungicide_ids.append(id)
+                self.fungicide_index = len(self.fungicide_ids) - 1
         ret = {"id": id}
 
         ret["time"] = datetime.now().strftime("%m/%d/%y %H:%M:%S")
@@ -141,7 +148,8 @@ class DataGenerator:
     def __use_fertilizer(self, id=""):
         if id == "":
             id = self.__gen_id()
-            self.chemical_ids.append(id)
+            self.fertilizer_ids.append(id)
+            self.fertilizer_index = len(self.fertilizer_ids) - 1
         ret = {"id": id}
 
         ret["time"] = datetime.now().strftime("%m/%d/%y %H:%M:%S")
@@ -195,12 +203,12 @@ class DataGenerator:
 
 # basically, one dg.(function) would be used per sensor. see below for example usage
 
-# dg = DataGenerator()
+dg = DataGenerator()
 # print(dg.sensor(True, True, True))
-# for i in range(50):
-#     print(dg.timer(herbicide=True))
-#     print(dg.timer(insecticide=True))
-#     print(dg.timer(fungicide=True))
-#     print(dg.timer(fertilizer=True))
-#     print("\n")
+for i in range(50):
+    print(dg.timer(herbicide=True))
+    print(dg.timer(insecticide=True))
+    print(dg.timer(fungicide=True))
+    print(dg.timer(fertilizer=True))
+    print("\n")
 # print(dg.monitor(True, True, True))
