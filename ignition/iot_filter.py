@@ -17,7 +17,7 @@ def fungicide_filter(di):
 
 def fertilizer_filter(di):
     if di["fertilizer?"]:
-        return di["spray fertilizer"]
+        return di["use fertilizer"]
     return None
 
 def chemical_sum(arr):
@@ -31,10 +31,9 @@ def chemical_sum(arr):
             time_start = curr_time
         elif curr_time > time_stop:
             time_stop = curr_time
-
     
     return {"id" : arr[0]["id"], 
-            "pesticide": arr[0]["pesticide"],
+            "pesticide": arr[0]["chemical"],
             "total amount": amount,
             "start time": time_start.strftime("%m/%d/%y %H:%M:%S.%f"),
             "end time": time_stop.strftime("%m/%d/%y %H:%M:%S.%f")}

@@ -65,13 +65,14 @@ class IoTSimulator:
 
         if herbicide:
             if self.herbicide_timer == 0:
-                self.herbicide_flag = False #will have unnecessary overrides but idc
-                self.herbicide_index = -1
                 ret["herbicide?"] = random.randint(0,10) == 4 #this would be smaller if i didn't need it to run a bunch
                 if ret["herbicide?"]:
                     self.herbicide_timer = 9 #continue spraying for 10 rounds
                     self.herbicide_flag = True
                     ret["spray herbicide"] = self.__spray_pesticide("herbicide")
+                else:
+                    self.herbicide_flag = False #will have unnecessary overrides but idc
+                    self.herbicide_index = -1
             else:
                 self.herbicide_timer -= 1
                 ret["herbicide?"] = True
@@ -79,13 +80,14 @@ class IoTSimulator:
 
         if insecticide:
             if self.insecticide_timer == 0:
-                self.herbicide_flag = False
-                self.herbicide_index = -1
                 ret["insecticide?"] = random.randint(0,10) == 4
                 if ret["insecticide?"]:
                     self.insecticide_timer = 9
                     self.insecticide_flag = True
                     ret["spray insecticide"] = self.__spray_pesticide("insecticide")
+                else:
+                    self.insecticide_flag = False
+                    self.insecticide_index = -1
             else:
                 self.insecticide_timer -= 1
                 ret["insecticide?"] = True
@@ -93,13 +95,14 @@ class IoTSimulator:
 
         if fungicide:
             if self.fungicide_timer == 0:
-                self.fungicide_flag = False
-                self.fungicide_index = -1
                 ret["fungicide?"] = random.randint(0,10) == 4
                 if ret["fungicide?"]:
                     self.fungicide_timer = 9
                     self.fungicide_flag = True
                     ret["spray fungicide"] = self.__spray_pesticide("fungicide")
+                else:
+                    self.fungicide_flag = False
+                    self.fungicide_index = -1
             else:
                 self.fungicide_timer -= 1
                 ret["fungicide?"] = True
@@ -107,13 +110,14 @@ class IoTSimulator:
 
         if fertilizer: #lol fertilizer would likely not work like this
             if self.fertilizer_timer == 0:
-                self.fertilizer_flag = False
-                self.fertilizer_index = -1
                 ret["fertilizer?"] = random.randint(0,10) == 4
                 if ret["fertilizer?"]:
                     self.fertilizer_timer = 9
                     self.fertilizer_flag = True
-                    ret["place fertilizer"] = self.__use_fertilizer()
+                    ret["use fertilizer"] = self.__use_fertilizer()
+                else:
+                    self.fertilizer_flag = False
+                    self.fertilizer_index = -1
             else:
                 self.fertilizer_timer -= 1
                 ret["fertilizer?"] = True
@@ -137,7 +141,7 @@ class IoTSimulator:
         ret = {"id": id}
 
         ret["time"] = datetime.now().strftime("%m/%d/%y %H:%M:%S.%f")
-        ret["pesticide"] = pesticide_type
+        ret["chemical"] = pesticide_type
         ret["amount"] = 1 #1 unit
 
         return ret
@@ -151,6 +155,7 @@ class IoTSimulator:
         ret = {"id": id}
 
         ret["time"] = datetime.now().strftime("%m/%d/%y %H:%M:%S.%f")
+        ret["chemical"] = "fertilizer"
         ret["amount"] = 1 #1 unit
 
         return ret
