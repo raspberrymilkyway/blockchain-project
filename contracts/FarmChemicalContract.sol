@@ -23,6 +23,9 @@ contract CropToken {
         uint256 amountUsed;
         uint256 cropCount;
         string cropType;
+        string timestamp;
+        //bool stop; //false for start/running; true for stop
+        string imageLink;
     }
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -75,42 +78,42 @@ contract CropToken {
         return true;
     }
 
-    function useFertilizer(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType) public returns (bool success){
+    function useFertilizer(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink) public returns (bool success){
         require(bytes(_brand).length > 0, "Fertilizer brand must be given");
         require(bytes(_location).length > 0, "Location where fertilizer was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which fertilizer was used must be given");
         require(_amount > 0, "Amount of fertilizer used must be given");
         require(_amount <= fertilizerLimit[msg.sender], "You cannot use that much fertilizer");
         require(_cropCount > 0, "Number of crops fertilizer was used on must be given");
-        Chemical memory f = Chemical(_brand, _location, _amount, _cropCount, _cropType);
+        Chemical memory f = Chemical(_brand, _location, _amount, _cropCount, _cropType, _timestamp, _imageLink);
         fertilizerLimit[msg.sender] -= _amount;
         emit Fertilizer(msg.sender, f);
         return true;
     }
     
     //Consider separating these, to match the design of everything else
-    function usePesticide(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _typeOfPesticide) public returns (bool success){
+    function usePesticide(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink, string memory _typeOfPesticide) public returns (bool success){
         require(bytes(_brand).length > 0, "Pesticide brand must be given");
         require(bytes(_location).length > 0, "Location where pesticide was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which pesticide was used must be given");
         require(bytes(_typeOfPesticide).length > 0, "Type of pesticide was used must be given");
         require(_amount > 0, "Amount of pesticide used must be given");
         require(_cropCount > 0, "Number of crops pesticide was used on must be given");
-        Chemical memory f = Chemical(_brand, _location, _amount, _cropCount, _cropType);
+        Chemical memory f = Chemical(_brand, _location, _amount, _cropCount, _cropType, _timestamp, _imageLink);
 
         //String comparisons are apparently only done via byte hash comparisons..?
         if (keccak256(bytes(_typeOfPesticide)) == keccak256(bytes("Fungicide"))){
-            require(_amount <= fungicideLimit[msg.sender], "You cannot use that much fungicide");
+            // require(_amount <= fungicideLimit[msg.sender], "You cannot use that much fungicide");
             fungicideLimit[msg.sender] -= _amount;
             emit Fungicide(msg.sender, f);
         }
         else if (keccak256(bytes(_typeOfPesticide)) == keccak256(bytes("Insecticide"))){
-            require(_amount <= insecticideLimit[msg.sender], "You cannot use that much insecticide");
+            // require(_amount <= insecticideLimit[msg.sender], "You cannot use that much insecticide");
             insecticideLimit[msg.sender] -= _amount;
             emit Insecticide(msg.sender, f);
         }
         else if (keccak256(bytes(_typeOfPesticide)) == keccak256(bytes("Herbicide"))){
-            require(_amount <= herbicideLimit[msg.sender], "You cannot use that much herbicide");
+            // require(_amount <= herbicideLimit[msg.sender], "You cannot use that much herbicide");
             herbicideLimit[msg.sender] -= _amount;
             emit Herbicide(msg.sender, f);
         }
@@ -120,10 +123,11 @@ contract CropToken {
         return true;
     }
 
+    //"set" functionality implies replacing the current value
     function setFertilizerLimit(address _farm, uint256 _fertilizerLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the fertilizer limit");
         require(_fertilizerLimit > 0, "Amount to add to fertilizer limit must be greater than 0");
-        fertilizerLimit[_farm] += _fertilizerLimit;
+        fertilizerLimit[_farm] = _fertilizerLimit;
         emit FertilizerLimit(_farm, fertilizerLimit[_farm], _fertilizerLimit);
         return true;
     }
@@ -131,7 +135,7 @@ contract CropToken {
     function setFungicideLimit(address _farm, uint256 _fungicideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the fungicide limit");
         require(_fungicideLimit > 0, "Amount to add to fungicide limit must be greater than 0");
-        fungicideLimit[_farm] += _fungicideLimit;
+        fungicideLimit[_farm] = _fungicideLimit;
         emit FungicideLimit(_farm, fungicideLimit[_farm], _fungicideLimit);
         return true;
     }
@@ -139,7 +143,7 @@ contract CropToken {
     function setInsecticideLimit(address _farm, uint256 _insecticideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the insecticide limit");
         require(_insecticideLimit > 0, "Amount to add to insecticide limit must be greater than 0");
-        insecticideLimit[_farm] += _insecticideLimit;
+        insecticideLimit[_farm] = _insecticideLimit;
         emit InsecticideLimit(_farm, insecticideLimit[_farm], _insecticideLimit);
         return true;
     }
@@ -147,7 +151,7 @@ contract CropToken {
     function setHerbicideLimit(address _farm, uint256 _herbicideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the herbicide limit");
         require(_herbicideLimit > 0, "Amount to add to herbicide limit must be greater than 0");
-        herbicideLimit[_farm] += _herbicideLimit;
+        herbicideLimit[_farm] = _herbicideLimit;
         emit HerbicideLimit(_farm, herbicideLimit[_farm], _herbicideLimit);
         return true;
     }
