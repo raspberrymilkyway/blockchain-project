@@ -1,7 +1,7 @@
 <!-- ChatGPT generated. Figure out how to do this, lol -->
 <template>
     <div>
-        <h2>Input Form</h2>
+        <h2>Manual Input</h2>
         <div>
             <input type="text" v-model="input1" placeholder="Fertilizer brand" />
             <input type="text" v-model="input2" placeholder="Location used" />
