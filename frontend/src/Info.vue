@@ -1,6 +1,6 @@
 <template>
     <main>
         <h1>About</h1>
-        <p>info goes here</p>
+        <p>CS5576 Blockchain project<br>Kylee Willis -- kwcnr</p>
     </main>
 </template>

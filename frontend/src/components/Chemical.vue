@@ -1,11 +1,12 @@
-<!-- ChatGPT generated. Figure out how to do this, lol -->
+<!-- Modified from ChatGPT -->
+
 <template>
     <div>
         <h2>Manual Input</h2>
         <div>
             <!-- <input type="text" v-model="chemical" placeholder="Type of chemical used" /> -->
             <select v-model="chemical">
-                <option value="">Choose an option...</option>
+                <option value="">Type of chemical used</option>
                 <option value="fertilizer">Fertilizer</option>
                 <option value="fungicide">Fungicide</option>
                 <option value="herbicide">Herbicide</option>
@@ -56,6 +57,8 @@ export default {
                 this.cropCount = '';
                 this.cropType = '';
                 this.imageLink = '';
+                console.log(inputs);
+                return inputs;
             }
             else if (this.chemical.localeCompare("") == 0){
                 console.log("chemical empty");
@@ -78,7 +81,6 @@ export default {
             else{
                 console.log("empty");
             }
-            console.log(inputs);
         }
     }
 };

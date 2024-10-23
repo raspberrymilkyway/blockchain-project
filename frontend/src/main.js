@@ -1,5 +1,6 @@
 import './assets/main.css'
 import './assets/nav.css'
+import './web3Handler'
 
 import { createApp } from 'vue'
 import History from './History.vue'

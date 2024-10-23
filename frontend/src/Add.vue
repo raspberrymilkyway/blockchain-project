@@ -8,5 +8,6 @@ import HelloMetamask from './components/HelloMetamask.vue';
         <h1>Add Chemical</h1>
         <hello-metamask/>
         <Chemical />
+        <p id="addOutput"></p>
     </main>
   </template>

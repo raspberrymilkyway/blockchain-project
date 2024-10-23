@@ -1,4 +1,22 @@
-const web3 = new Web3();
+import Web3 from 'web3'
+
+if (typeof window.ethereum !== 'undefined') {
+  // Check if MetaMask or other Ethereum provider is injected
+  window.web3 = new Web3(window.ethereum);
+
+  // Request account access if needed
+  try {
+    // await window.ethereum.request({ method: 'eth_requestAccounts' });
+    window.web3.eth.requestAccounts();
+  } catch (error) {
+    console.error('User denied account access');
+  }
+
+  console.log('Web3 instance:', web3);
+} else {
+  console.error('No Web3 provider found');
+  alert("Please install MetaMask!");
+}
 
 const abi = [
     {
@@ -850,3 +868,44 @@ const abi = [
 
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const tokenContract = new web3.eth.Contract(abi, contractAddress);
+
+window.addEventListener("onload", setMetamaskAddress());
+window.ethereum.on("accountsChanged", function(){
+  setMetamaskAddress();
+});
+
+async function setMetamaskAddress() { 
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  document.getElementById("metamaskAddress").innerText = "MetaMask Address: " + accounts[0].toString();
+  console.log(accounts);
+}
+
+
+
+tokenContract.events.Fertilizer({ fromBlock: 0 }, function(error, event){
+  console.log(event);
+})
+.on('data', function(event){
+  console.log("fertilizer", event.returnValues[1]);
+})
+
+tokenContract.events.Fungicide({ fromBlock: 0 }, function(error, event){
+  console.log(event);
+})
+.on('data', function(event){
+  console.log("fungicide", event.returnValues[1]);
+})
+
+tokenContract.events.Insecticide({ fromBlock: 0 }, function(error, event){
+  console.log(event);
+})
+.on('data', function(event){
+  console.log("insecticide", event.returnValues[1]);
+})
+
+tokenContract.events.Herbicide({ fromBlock: 0 }, function(error, event){
+  console.log(event);
+})
+.on('data', function(event){
+  console.log("herbicide", event.returnValues[1]);
+})
