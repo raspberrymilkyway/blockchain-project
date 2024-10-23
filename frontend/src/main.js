@@ -1,9 +1,11 @@
 import './assets/main.css'
-// import './web3Handler.js'
+import './assets/nav.css'
 
 import { createApp } from 'vue'
-// import App from './App.vue'
-import DApp from './DApp.vue'
+import History from './History.vue'
+import Add from "./Add.vue"
+import Info from './Info.vue'
 
-// createApp(App).mount('#app')
-createApp(DApp).mount('#app')
+createApp(History).mount('#history')
+createApp(Add).mount("#add")
+createApp(Info).mount("#about")

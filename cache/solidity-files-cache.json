@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\ghost\\Documents\\kylee\\blockchain\\blockchain-project\\contracts\\FarmChemicalContract.sol": {
+      "lastModificationDate": 1729638016178,
+      "contentHash": "6cc04ff492492e18ab1face7dd16e378",
+      "sourceName": "contracts/FarmChemicalContract.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "CropToken"
+      ]
+    }
+  }
+}

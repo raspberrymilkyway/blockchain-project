@@ -18,7 +18,7 @@ contract CropToken {
     mapping(address => uint256) public herbicideLimit;
 
     struct Chemical{
-        string brandUsed;
+        string chemicalType;
         string locationUsed;
         uint256 amountUsed;
         uint256 cropCount;
