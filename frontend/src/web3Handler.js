@@ -894,29 +894,13 @@ async function setMetamaskAddress() {
 }
 
 
-function addHistoryEntry(chemical, location, amount, cropCount, cropType, timestamp, imageLink){
-  var log = document.getElementById("history-log");
-  var cont = document.getElementById("history-container");
-  const clone = cont.content.cloneNode(true);
-  clone.getElementById("history-chemical").innerText.append(chemical);
-  clone.getElementById("history-location").innerText.append(location);
-  clone.getElementById("history-amount").innerText.append(amount);
-  clone.getElementById("history-crop-count").innerText.append(cropCount);
-  clone.getElementById("history-crop-type").innerText.append(cropType);
-  clone.getElementById("history-timestamp").innerText.append(timestamp);
-  clone.getElementById("history-image-link").innerText.append(imageLink);
-  log.appendChild(clone);
-}
-
 
 //event listeners, for automation
 tokenContract.events.Fertilizer({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
   .on('data', function (event) {
-    const output = event.returnValues[1];
-    console.log("fertilizer", output);
-    // addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink);
+    console.log("fertilizer", event.returnValues[1]);
   })
 
 tokenContract.events.Fungicide({ fromBlock: 0 }, function (error, event) {
