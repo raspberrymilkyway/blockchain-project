@@ -1,12 +1,26 @@
 import './assets/main.css'
 import './assets/nav.css'
+import './assets/add.css'
+import './assets/history.css'
 import './web3Handler'
+import { fertilize, pesticide } from "./web3Handler"
 
 import { createApp } from 'vue'
 import History from './History.vue'
 import Add from "./Add.vue"
-import Info from './Info.vue'
 
 createApp(History).mount('#history')
 createApp(Add).mount("#add")
-createApp(Info).mount("#about")
+
+//This has to be here unless I want extra weird imports in other files.
+// Better design might be to take this and put it in a completely separate file altogether with the needed imports,
+// then handle it there and import the result to here... Alas.
+document.addEventListener("submit", function(e){
+    console.log("submitted", e);
+    if (e.detail.chemical == "fertilizer"){
+        fertilize(e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink);
+    }
+    else{
+        pesticide(e.detail.chemical, e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink);
+    }
+})

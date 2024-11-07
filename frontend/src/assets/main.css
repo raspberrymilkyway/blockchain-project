@@ -13,3 +13,7 @@ div {
   transition: 0.4s;
   padding: 3px;
 }
+
+.pad-left{
+  padding-left: 40px;
+}
