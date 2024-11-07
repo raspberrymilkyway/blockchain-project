@@ -49,16 +49,16 @@ async function main() {
     console.log("Acc1's herbicide limit: ", await myToken.herbicideLimit(acc1.address));
 
     console.log("\nUsing 100 of acc1's fertilizer, fungicide, insecticide, and herbicide");
-    const g = await myToken.connect(acc1).useFertilizer("a", "b" , 100, 10, "tomato", "now", "");
+    const g = await myToken.connect(acc1).useFertilizer("fertilizer", "b" , 100, 10, "tomato", "now", "");
     await g.wait();
     console.log("Acc1's fertilizer limit: ", await myToken.fertilizerLimit(acc1.address));
-    const h = await myToken.connect(acc1).usePesticide("a", "b" , 100, 10, "tomato", "now", "", "Fungicide");
+    const h = await myToken.connect(acc1).usePesticide("fungicide", "b" , 100, 10, "tomato", "now", "", "Fungicide");
     await h.wait();
     console.log("Acc1's fungicide limit: ", await myToken.fungicideLimit(acc1.address));
-    const i = await myToken.connect(acc1).usePesticide("a", "b" , 100, 10, "tomato", "now", "", "Insecticide");
+    const i = await myToken.connect(acc1).usePesticide("insecticide", "b" , 100, 10, "tomato", "now", "", "Insecticide");
     await i.wait();
     console.log("Acc1's insecticide limit: ", await myToken.insecticideLimit(acc1.address));
-    const j = await myToken.connect(acc1).usePesticide("a", "b" , 100, 10, "tomato", "now", "", "Herbicide");
+    const j = await myToken.connect(acc1).usePesticide("herbicide", "b" , 100, 10, "tomato", "now", "", "Herbicide");
     await j.wait();
     console.log("Acc1's herbicide limit: ", await myToken.herbicideLimit(acc1.address));
 }

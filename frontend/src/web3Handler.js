@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import { addHistoryEntry } from './History.vue';
 
 if (typeof window.ethereum !== 'undefined') {
   // Check if MetaMask or other Ethereum provider is injected
@@ -900,28 +901,36 @@ tokenContract.events.Fertilizer({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
   .on('data', function (event) {
-    console.log("fertilizer", event.returnValues[1]);
+    const output = event.returnValues[1];
+    console.log("fertilizer", output);
+    addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink)
   })
 
 tokenContract.events.Fungicide({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
   .on('data', function (event) {
-    console.log("fungicide", event.returnValues[1]);
+    const output = event.returnValues[1];
+    console.log("fungicide", output);
+    addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink)
   })
 
 tokenContract.events.Insecticide({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
   .on('data', function (event) {
-    console.log("insecticide", event.returnValues[1]);
+    const output = event.returnValues[1];
+    console.log("insecticide", output);
+    addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink)
   })
 
 tokenContract.events.Herbicide({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
   .on('data', function (event) {
-    console.log("herbicide", event.returnValues[1]);
+    const output = event.returnValues[1];
+    console.log("herbicide", output);
+    addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink)
   })
 
 
@@ -944,7 +953,7 @@ async function pesticide(chemical, location, amount, cropCount, cropType, imageL
   const chem = chemical[0].toUpperCase() + chemical.slice(1)
   try{
     const addr = accounts[0];
-    await tokenContract.methods.usePesticide("pesticide", location, amount, cropCount, cropType, time, imageLink, chem).send({from: addr});
+    await tokenContract.methods.usePesticide(chemical, location, amount, cropCount, cropType, time, imageLink, chem).send({from: addr});
     var lim = await tokenContract.methods.fungicideLimit(addr).call();
     document.getElementById("fungicideLimit").innerText = "Fungicide Limit: " + lim.toString();
     lim = await tokenContract.methods.insecticideLimit(addr).call();

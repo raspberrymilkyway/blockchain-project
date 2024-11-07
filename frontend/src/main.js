@@ -19,7 +19,6 @@ createApp(Add).mount("#add")
 document.addEventListener("submit", function(e){
     if (e.detail.chemical == "fertilizer"){
         fertilize(e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink);
-        addHistoryEntry("Fertilizer", e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink)
     }
     else{
         pesticide(e.detail.chemical, e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink);
