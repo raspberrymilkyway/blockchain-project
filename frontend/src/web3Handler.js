@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { addHistoryEntry } from './components/History.vue';
+import { addHistoryEntry, addBulkHistoryEntry } from './components/History.vue';
 
 // Copied from... Google AI..?
 if (typeof window.ethereum !== 'undefined') {
@@ -894,7 +894,8 @@ async function setMetamaskAddress() {
 
 
 
-//event listeners, for automation
+//event listeners
+//manual addition events
 tokenContract.events.Fertilizer({ fromBlock: 0 }, function (error, event) {
   console.log(event);
 })
@@ -931,6 +932,42 @@ tokenContract.events.Herbicide({ fromBlock: 0 }, function (error, event) {
     addHistoryEntry(output.chemicalType, output.locationUsed, output.amountUsed, output.cropCount, output.cropType, output.timestamp, output.imageLink)
   })
 
+//bulk events, automated from iot -- no manual use/additions
+tokenContract.events.FertilizerBulk({ fromBlock: 0 }, function (error, event) {
+  console.log(event);
+})
+  .on('data', function (event) {
+    const output = event.returnValues[1];
+    console.log("fertilizer bulk", output);
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+  })
+
+tokenContract.events.FungicideBulk({ fromBlock: 0 }, function (error, event) {
+  console.log(event);
+})
+  .on('data', function (event) {
+    const output = event.returnValues[1];
+    console.log("fungicide bulk", output);
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+  })
+
+tokenContract.events.InsecticideBulk({ fromBlock: 0 }, function (error, event) {
+  console.log(event);
+})
+  .on('data', function (event) {
+    const output = event.returnValues[1];
+    console.log("insecticide bulk", output);
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+  })
+
+tokenContract.events.HerbicideBulk({ fromBlock: 0 }, function (error, event) {
+  console.log(event);
+})
+  .on('data', function (event) {
+    const output = event.returnValues[1];
+    console.log("herbicide bulk", output);
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+  })
 
 //functions
 async function fertilize(location, amount, cropCount, cropType, imageLink){
@@ -963,6 +1000,47 @@ async function pesticide(chemical, location, amount, cropCount, cropType, imageL
   }
 }
 
+async function fertilizerBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  try{
+    await tokenContract.methods.useFertilizerBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    var lim = await tokenContract.methods.fertilizerLimit(accounts[0]).call();
+    document.getElementById("fertilizerLimit").innerText = "Fertilizer Limit: " + lim.toString();
+  } catch (e){
+    console.error(e)
+  }
+}
+async function fungicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  try{
+    await tokenContract.methods.useFungicideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    var lim = await tokenContract.methods.fungicideLimit(accounts[0]).call();
+    document.getElementById("fungicideLimit").innerText = "Fungicide Limit: " + lim.toString();
+  } catch (e){
+    console.error(e)
+  }
+}
+async function insecticideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  try{
+    await tokenContract.methods.useInsecticideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    var lim = await tokenContract.methods.insecticideLimit(accounts[0]).call();
+    document.getElementById("insecticideLimit").innerText = "Insecticide Limit: " + lim.toString();
+  } catch (e){
+    console.error(e)
+  }
+}
+async function herbicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  try{
+    await tokenContract.methods.useHerbicideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    var lim = await tokenContract.methods.herbicideLimit(accounts[0]).call();
+    document.getElementById("herbicideLimit").innerText = "Herbicide Limit: " + lim.toString();
+  } catch (e){
+    console.error(e)
+  }
+}
+
 export{
-  fertilize, pesticide
+  fertilize, pesticide, fertilizerBulk, fungicideBulk, insecticideBulk, herbicideBulk
 };

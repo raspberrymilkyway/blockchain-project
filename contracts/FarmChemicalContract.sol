@@ -28,6 +28,13 @@ contract CropToken {
         string imageLink;
     }
 
+    struct ChemicalBulk{
+        Chemical chemical;
+        uint256 timesRun;
+        string startTime;
+        string endTime;
+    }
+
     event Transfer(address indexed from, address indexed to, uint256 value);
     event ApprovedTransfer(address indexed from, address indexed to, address indexed sender, uint256 value);
     event Approval(address indexed sender, address indexed spender, uint256 value);
@@ -36,6 +43,11 @@ contract CropToken {
     event Fungicide(address indexed from, Chemical fungicide);
     event Insecticide(address indexed from, Chemical insecticide);
     event Herbicide(address indexed from, Chemical herbicide);
+
+    event FertilizerBulk(address indexed from, ChemicalBulk fertilizer);
+    event FungicideBulk(address indexed from, ChemicalBulk fungicide);
+    event InsecticideBulk(address indexed from, ChemicalBulk insecticide);
+    event HerbicideBulk(address indexed from, ChemicalBulk herbicide);
 
     event FertilizerLimit(address indexed farm, uint256 fertilizerLimit, uint256 addedAmount);
     event FungicideLimit(address indexed farm, uint256 fungicideLimit, uint256 addedAmount);
@@ -83,7 +95,7 @@ contract CropToken {
         require(bytes(_location).length > 0, "Location where fertilizer was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which fertilizer was used must be given");
         require(_amount > 0, "Amount of fertilizer used must be given");
-        require(_amount <= fertilizerLimit[msg.sender], "You cannot use that much fertilizer");
+        // require(_amount <= fertilizerLimit[msg.sender], "You cannot use that much fertilizer");
         require(_cropCount > 0, "Number of crops fertilizer was used on must be given");
         Chemical memory f = Chemical(_brand, _location, _amount, _cropCount, _cropType, _timestamp, _imageLink);
         fertilizerLimit[msg.sender] -= _amount;
@@ -123,6 +135,58 @@ contract CropToken {
         return true;
     }
 
+    function useFertilizerBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+        require(bytes(_location).length > 0, "Location where fertilizer was used must be given");
+        require(bytes(_cropType).length > 0, "Crop type on which fertilizer was used must be given");
+        require(_amount > 0, "Amount of fertilizer used must be given");
+        require(_cropCount > 0, "Number of crops fertilizer was used on must be given");
+        require(_timesRun > 0, "Must have run at least once.");
+        Chemical memory c = Chemical("fertilizer", _location, _amount, _cropCount, _cropType, _startTime, _imageLink);
+        ChemicalBulk memory f = ChemicalBulk(c, _timesRun, _startTime, _endTime);
+        fertilizerLimit[msg.sender] -= _amount;
+        emit FertilizerBulk(msg.sender, f);
+        return true;
+    }
+
+    function useFungicideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+        require(bytes(_location).length > 0, "Location where fungicide was used must be given");
+        require(bytes(_cropType).length > 0, "Crop type on which fungicide was used must be given");
+        require(_amount > 0, "Amount of fungicide used must be given");
+        require(_cropCount > 0, "Number of crops fungicide was used on must be given");
+        require(_timesRun > 0, "Must have run at least once.");
+        Chemical memory c = Chemical("fungicide", _location, _amount, _cropCount, _cropType, _startTime, _imageLink);
+        ChemicalBulk memory f = ChemicalBulk(c, _timesRun, _startTime, _endTime);
+        fungicideLimit[msg.sender] -= _amount;
+        emit FungicideBulk(msg.sender, f);
+        return true;
+    }
+
+    function useInsecticideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+        require(bytes(_location).length > 0, "Location where insecticide was used must be given");
+        require(bytes(_cropType).length > 0, "Crop type on which insecticide was used must be given");
+        require(_amount > 0, "Amount of insecticide used must be given");
+        require(_cropCount > 0, "Number of crops insecticide was used on must be given");
+        require(_timesRun > 0, "Must have run at least once.");
+        Chemical memory c = Chemical("insecticide", _location, _amount, _cropCount, _cropType, _startTime, _imageLink);
+        ChemicalBulk memory f = ChemicalBulk(c, _timesRun, _startTime, _endTime);
+        insecticideLimit[msg.sender] -= _amount;
+        emit InsecticideBulk(msg.sender, f);
+        return true;
+    }
+
+    function useHerbicideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+        require(bytes(_location).length > 0, "Location where herbicide was used must be given");
+        require(bytes(_cropType).length > 0, "Crop type on which herbicide was used must be given");
+        require(_amount > 0, "Amount of herbicide used must be given");
+        require(_cropCount > 0, "Number of crops herbicide was used on must be given");
+        require(_timesRun > 0, "Must have run at least once.");
+        Chemical memory c = Chemical("herbicide", _location, _amount, _cropCount, _cropType, _startTime, _imageLink);
+        ChemicalBulk memory f = ChemicalBulk(c, _timesRun, _startTime, _endTime);
+        herbicideLimit[msg.sender] -= _amount;
+        emit HerbicideBulk(msg.sender, f);
+        return true;
+    }
+
     //"set" functionality implies replacing the current value
     function setFertilizerLimit(address _farm, uint256 _fertilizerLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the fertilizer limit");
@@ -154,5 +218,9 @@ contract CropToken {
         herbicideLimit[_farm] = _herbicideLimit;
         emit HerbicideLimit(_farm, herbicideLimit[_farm], _herbicideLimit);
         return true;
+    }
+
+    function isDeployer(address addr) public view returns (bool dep){
+        return deployer == addr;
     }
 }

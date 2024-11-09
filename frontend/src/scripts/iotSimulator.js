@@ -130,12 +130,22 @@ class IoTSimulator {
                 this.fungicideIndex = this.fungicideIds.length - 1;
             }
         }
+        const locations = ["Loc A", "Plot B", "Field C", "Loc D", "Plot E", "Field F"];
+        const loc = locations[Math.floor(Math.random() * locations.length)];
+
+        const cropTypes = ["Tomato", "Potato", "Corn"];
+        const crop = cropTypes[Math.floor(Math.random() * cropTypes.length)];
+
+        const count = Math.ceil(Math.random() * 50);
 
         const ret = {
             id,
             time: new Date().toISOString().slice(0, 23),
             chemical: pesticideType,
-            amount: 1 // 1 unit
+            amount: 1, // 1 unit
+            location: loc,
+            cropCount: count,
+            cropType: crop,
         };
 
         return ret;
@@ -148,12 +158,22 @@ class IoTSimulator {
             this.fertilizerIds.push(id);
             this.fertilizerIndex = this.fertilizerIds.length - 1;
         }
+        const locations = ["Loc A", "Plot B", "Field C", "Loc D", "Plot E", "Field F"];
+        const loc = locations[Math.floor(Math.random() * locations.length)];
+
+        const cropTypes = ["Tomato", "Potato", "Corn"];
+        const crop = cropTypes[Math.floor(Math.random() * cropTypes.length)];
+
+        const count = Math.ceil(Math.random() * 50);
 
         const ret = {
             id,
             time: new Date().toISOString().slice(0, 23),
             chemical: "fertilizer",
-            amount: 1 // 1 unit
+            amount: 1, // 1 unit
+            location: loc,
+            cropCount: count,
+            cropType: crop,
         };
 
         return ret;
