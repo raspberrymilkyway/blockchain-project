@@ -2,7 +2,6 @@
 
 import {IoTSimulator} from "./iotSimulator"
 import {herbicideFilter, insecticideFilter, fungicideFilter, fertilizerFilter, chemicalSum} from "./iotFilter"
-// import { fungicideBulk, fertilizerBulk, insecticideBulk, herbicideBulk } from "@/web3Handler";
 
 function gen(ct) {
     const dg = new IoTSimulator(); 
@@ -29,8 +28,6 @@ function gen(ct) {
             herbSpray = false;
             const cs = chemicalSum(currHerb);
             console.log(cs);
-            // herbicideBulk(location, cs["total amount"], cropCount, cropType, "", cs["times run"], cs["start time"], cs["end time"]);
-            //location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime
             currHerb = [];
             log.push(cs)
         }
