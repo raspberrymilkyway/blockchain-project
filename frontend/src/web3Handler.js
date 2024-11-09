@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { addHistoryEntry } from './History.vue';
+import { addHistoryEntry } from './components/History.vue';
 
 if (typeof window.ethereum !== 'undefined') {
   // Check if MetaMask or other Ethereum provider is injected

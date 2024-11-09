@@ -6,7 +6,7 @@ import './web3Handler'
 
 import { createApp } from 'vue'
 import Auto from './Auto.vue'
-import History from './History.vue'
+import History from './components/History.vue'
 
 createApp(Auto).mount("#iot")
 createApp(History).mount("#history")

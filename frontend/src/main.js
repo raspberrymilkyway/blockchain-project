@@ -6,9 +6,9 @@ import './web3Handler'
 import { fertilize, pesticide } from "./web3Handler"
 
 import { createApp } from 'vue'
-import History from './History.vue'
+import History from './components/History.vue'
 import Add from "./Add.vue"
-import { addHistoryEntry } from './History.vue'
+import { addHistoryEntry } from './components/History.vue'
 
 createApp(History).mount('#history')
 createApp(Add).mount("#add")
