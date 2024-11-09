@@ -1,19 +1,17 @@
 import Web3 from 'web3'
 import { addHistoryEntry } from './components/History.vue';
 
+// Copied from... Google AI..?
 if (typeof window.ethereum !== 'undefined') {
   // Check if MetaMask or other Ethereum provider is injected
   window.web3 = new Web3(window.ethereum);
 
   // Request account access if needed
   try {
-    // await window.ethereum.request({ method: 'eth_requestAccounts' });
     window.web3.eth.requestAccounts();
   } catch (error) {
     console.error('User denied account access');
   }
-
-  // console.log('Web3 instance:', web3);
 } else {
   console.error('No Web3 provider found');
   alert("Please install MetaMask!");

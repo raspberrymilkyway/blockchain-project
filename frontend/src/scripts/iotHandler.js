@@ -1,7 +1,8 @@
 // Used ChatGPT to translate these from Python
 
-import {IoTSimulator} from "./iot_simulator"
-import {herbicideFilter, insecticideFilter, fungicideFilter, fertilizerFilter, chemicalSum} from "./iot_filter"
+import {IoTSimulator} from "./iotSimulator"
+import {herbicideFilter, insecticideFilter, fungicideFilter, fertilizerFilter, chemicalSum} from "./iotFilter"
+
 
 function gen(ct) {
     const dg = new IoTSimulator(); 
@@ -13,6 +14,7 @@ function gen(ct) {
     let fungiSpray = false;
     let currFert = [];
     let useFert = false;
+    let log = [];
 
     for (let x = 0; x < ct; x++) {
         let out = [];
@@ -25,13 +27,17 @@ function gen(ct) {
             herbSpray = true;
         } else if (herbSpray) {
             herbSpray = false;
-            console.log(chemicalSum(currHerb));
+            const cs = chemicalSum(currHerb);
+            console.log(cs);
             currHerb = [];
+            log.push(cs)
         }
         if (herbSpray && x === ct - 1) {
             herbSpray = false;
-            console.log(chemicalSum(currHerb));
+            const cs = chemicalSum(currHerb);
+            console.log(cs);
             currHerb = [];
+            log.push(cs)
         }
 
         // Insecticide processing
@@ -42,13 +48,17 @@ function gen(ct) {
             insectSpray = true;
         } else if (insectSpray) {
             insectSpray = false;
-            console.log(chemicalSum(currInsect));
+            const cs = chemicalSum(currInsect);
+            console.log(cs);
             currInsect = [];
+            log.push(cs)
         }
         if (insectSpray && x === ct - 1) {
             insectSpray = false;
-            console.log(chemicalSum(currInsect));
+            const cs = chemicalSum(currInsect);
+            console.log(cs);
             currInsect = [];
+            log.push(cs)
         }
 
         // Fungicide processing
@@ -59,13 +69,17 @@ function gen(ct) {
             fungiSpray = true;
         } else if (fungiSpray) {
             fungiSpray = false;
-            console.log(chemicalSum(currFungi));
+            const cs = chemicalSum(currFungi);
+            console.log(cs);
             currFungi = [];
+            log.push(cs)
         }
         if (fungiSpray && x === ct - 1) {
             fungiSpray = false;
-            console.log(chemicalSum(currFungi));
+            const cs = chemicalSum(currFungi);
+            console.log(cs);
             currFungi = [];
+            log.push(cs)
         }
 
         // Fertilizer processing
@@ -76,16 +90,21 @@ function gen(ct) {
             useFert = true;
         } else if (useFert) {
             useFert = false;
-            console.log(chemicalSum(currFert));
+            const cs = chemicalSum(currFert);
+            console.log(cs);
             currFert = [];
+            log.push(cs)
         }
         if (useFert && x === ct - 1) {
             useFert = false;
-            console.log(chemicalSum(currFert));
+            const cs = chemicalSum(currFert);
+            console.log(cs);
             currFert = [];
+            log.push(cs)
         }
     }
     console.log("\n")
+    return log
 }
 
 export{
