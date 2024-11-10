@@ -1486,9 +1486,6 @@ tokenContract.events.FertilizerBulk({ fromBlock: 0 }, function (error, event) {
   .on('data', function (event) {
     const output = event.returnValues[1];
     console.log("fertilizer bulk", output);
-    let dates = new Date(output.startTime);
-    let datee = new Date(output.endTime);
-    console.log(dates.toLocaleString());
     addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timesRun, output.startTime, output.endTime, output.chemical.imageLink)
   })
 
