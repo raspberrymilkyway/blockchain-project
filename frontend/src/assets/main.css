@@ -7,13 +7,37 @@ div {
   font-weight: normal;
 }
 
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
 .pad-left{
   padding-left: 40px;
+}
+
+/* Snagged button styling from ChatGPT */
+button {
+  padding: 12px 24px;
+  background-color: #35495e; /* Blue background */
+  color: white;  /* Text color */
+  font-size: 16px;
+  border: none;  /* Remove default border */
+  border-radius: 8px;  /* Rounded corners */
+  cursor: pointer;  /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease;  /* Smooth transitions for background and scale */
+  margin-right: 15px;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #42b883;  /* Darker blue */
+  transform: scale(1.05);  /* Slight scale up */
+}
+
+/* Active effect */
+button:active {
+  background-color: #20b974;  /* Even darker blue when clicked */
+  transform: scale(0.98);  /* Slight scale down on click */
+}
+
+/* Focus effect for accessibility */
+button:focus {
+  outline: 2px solid #f39c12;  /* Outline when focused */
+  outline-offset: 2px;  /* Offset the outline */
 }

@@ -55,8 +55,8 @@ function chemicalSum(arr) {
         "location": location,
         "crop count": cropCount,
         "crop type": cropType,
-        "start time": timeStart, // ISO string formatted to match %m/%d/%y %H:%M:%S.%f
-        "end time": timeStop
+        "start time": timeStart.toISOString().slice(0, 23), // ISO string formatted to match %m/%d/%y %H:%M:%S.%f
+        "end time": timeStop.toISOString().slice(0, 23)
     };
 }
 

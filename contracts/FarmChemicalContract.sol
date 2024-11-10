@@ -12,15 +12,15 @@ contract CropToken {
     mapping(address => uint256) public balanceOf;
     mapping(address => uint256) public approvedAmount; //Only the deployer account can approve
 
-    mapping(address => uint256) public fertilizerLimit;
-    mapping(address => uint256) public fungicideLimit;
-    mapping(address => uint256) public insecticideLimit;
-    mapping(address => uint256) public herbicideLimit;
+    mapping(address => int) public fertilizerLimit;
+    mapping(address => int) public fungicideLimit;
+    mapping(address => int) public insecticideLimit;
+    mapping(address => int) public herbicideLimit;
 
     struct Chemical{
         string chemicalType;
         string locationUsed;
-        uint256 amountUsed;
+        int256 amountUsed;
         uint256 cropCount;
         string cropType;
         string timestamp;
@@ -49,10 +49,10 @@ contract CropToken {
     event InsecticideBulk(address indexed from, ChemicalBulk insecticide);
     event HerbicideBulk(address indexed from, ChemicalBulk herbicide);
 
-    event FertilizerLimit(address indexed farm, uint256 fertilizerLimit, uint256 addedAmount);
-    event FungicideLimit(address indexed farm, uint256 fungicideLimit, uint256 addedAmount);
-    event InsecticideLimit(address indexed farm, uint256 insecticideLimit, uint256 addedAmount);
-    event HerbicideLimit(address indexed farm, uint256 herbicideLimit, uint256 addedAmount);
+    event FertilizerLimit(address indexed farm, int256 fertilizerLimit, int256 addedAmount);
+    event FungicideLimit(address indexed farm, int256 fungicideLimit, int256 addedAmount);
+    event InsecticideLimit(address indexed farm, int256 insecticideLimit, int256 addedAmount);
+    event HerbicideLimit(address indexed farm, int256 herbicideLimit, int256 addedAmount);
     
     constructor(uint256 _initialSupply) {
         totalSupply = _initialSupply;
@@ -90,7 +90,7 @@ contract CropToken {
         return true;
     }
 
-    function useFertilizer(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink) public returns (bool success){
+    function useFertilizer(string memory _brand, string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink) public returns (bool success){
         require(bytes(_brand).length > 0, "Fertilizer brand must be given");
         require(bytes(_location).length > 0, "Location where fertilizer was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which fertilizer was used must be given");
@@ -104,7 +104,7 @@ contract CropToken {
     }
     
     //Consider separating these, to match the design of everything else
-    function usePesticide(string memory _brand, string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink, string memory _typeOfPesticide) public returns (bool success){
+    function usePesticide(string memory _brand, string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _timestamp, string memory _imageLink, string memory _typeOfPesticide) public returns (bool success){
         require(bytes(_brand).length > 0, "Pesticide brand must be given");
         require(bytes(_location).length > 0, "Location where pesticide was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which pesticide was used must be given");
@@ -135,7 +135,7 @@ contract CropToken {
         return true;
     }
 
-    function useFertilizerBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+    function useFertilizerBulk(string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
         require(bytes(_location).length > 0, "Location where fertilizer was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which fertilizer was used must be given");
         require(_amount > 0, "Amount of fertilizer used must be given");
@@ -148,7 +148,7 @@ contract CropToken {
         return true;
     }
 
-    function useFungicideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+    function useFungicideBulk(string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
         require(bytes(_location).length > 0, "Location where fungicide was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which fungicide was used must be given");
         require(_amount > 0, "Amount of fungicide used must be given");
@@ -161,7 +161,7 @@ contract CropToken {
         return true;
     }
 
-    function useInsecticideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+    function useInsecticideBulk(string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
         require(bytes(_location).length > 0, "Location where insecticide was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which insecticide was used must be given");
         require(_amount > 0, "Amount of insecticide used must be given");
@@ -174,7 +174,7 @@ contract CropToken {
         return true;
     }
 
-    function useHerbicideBulk(string memory _location, uint256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
+    function useHerbicideBulk(string memory _location, int256 _amount, uint256 _cropCount, string memory _cropType, string memory _imageLink, uint256 _timesRun, string memory _startTime, string memory _endTime) public returns (bool success){
         require(bytes(_location).length > 0, "Location where herbicide was used must be given");
         require(bytes(_cropType).length > 0, "Crop type on which herbicide was used must be given");
         require(_amount > 0, "Amount of herbicide used must be given");
@@ -188,7 +188,7 @@ contract CropToken {
     }
 
     //"set" functionality implies replacing the current value
-    function setFertilizerLimit(address _farm, uint256 _fertilizerLimit) public returns (bool success){
+    function setFertilizerLimit(address _farm, int256 _fertilizerLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the fertilizer limit");
         require(_fertilizerLimit > 0, "Amount to add to fertilizer limit must be greater than 0");
         fertilizerLimit[_farm] = _fertilizerLimit;
@@ -196,7 +196,7 @@ contract CropToken {
         return true;
     }
 
-    function setFungicideLimit(address _farm, uint256 _fungicideLimit) public returns (bool success){
+    function setFungicideLimit(address _farm, int256 _fungicideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the fungicide limit");
         require(_fungicideLimit > 0, "Amount to add to fungicide limit must be greater than 0");
         fungicideLimit[_farm] = _fungicideLimit;
@@ -204,7 +204,7 @@ contract CropToken {
         return true;
     }
 
-    function setInsecticideLimit(address _farm, uint256 _insecticideLimit) public returns (bool success){
+    function setInsecticideLimit(address _farm, int256 _insecticideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the insecticide limit");
         require(_insecticideLimit > 0, "Amount to add to insecticide limit must be greater than 0");
         insecticideLimit[_farm] = _insecticideLimit;
@@ -212,7 +212,7 @@ contract CropToken {
         return true;
     }
 
-    function setHerbicideLimit(address _farm, uint256 _herbicideLimit) public returns (bool success){
+    function setHerbicideLimit(address _farm, int256 _herbicideLimit) public returns (bool success){
         require(msg.sender == deployer, "You do not have permission to set the herbicide limit");
         require(_herbicideLimit > 0, "Amount to add to herbicide limit must be greater than 0");
         herbicideLimit[_farm] = _herbicideLimit;

@@ -30,7 +30,8 @@ class IoTSimulator {
         }
 
         const ret = { id };
-        ret["time"] = new Date() // Format similar to %m/%d/%y %H:%M:%S.%f
+        ret["time"] = new Date().toISOString().slice(0, 23); // Format similar to %m/%d/%y %H:%M:%S.%f
+
         if (irrigation) {
             ret["watered?"] = Math.floor(Math.random() * 100) === 42;
         }
@@ -139,7 +140,7 @@ class IoTSimulator {
 
         const ret = {
             id,
-            time: new Date(Date.now()),
+            time: new Date().toISOString().slice(0, 23),
             chemical: pesticideType,
             amount: 1, // 1 unit
             location: loc,
@@ -167,7 +168,7 @@ class IoTSimulator {
 
         const ret = {
             id,
-            time: new Date(Date.now()),
+            time: new Date().toISOString().slice(0, 23),
             chemical: "fertilizer",
             amount: 1, // 1 unit
             location: loc,

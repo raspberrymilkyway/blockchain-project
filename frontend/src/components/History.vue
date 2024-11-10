@@ -66,7 +66,7 @@ function addBulkHistoryEntry(chemical, location, amount, cropCount, cropType, ti
   clone.querySelector(".history-crop-count").innerText = "Crops affected: " + cropCount;
   clone.querySelector(".history-crop-type").innerText = "Crop type: " + cropType;
   clone.querySelector(".history-start-time").innerText = "Start time: " + startTime;
-  clone.querySelector(".history-end-time").innerText = "Start time: " + endTime;
+  clone.querySelector(".history-end-time").innerText = "End time: " + endTime;
   clone.querySelector(".history-image-link").innerText = "Image link: " + imageLink;
   log.appendChild(clone);
 }

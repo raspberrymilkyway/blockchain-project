@@ -1,8 +1,7 @@
 // Used ChatGPT to translate these from Python
 
-import {IoTSimulator} from "./iotSimulator"
-import {herbicideFilter, insecticideFilter, fungicideFilter, fertilizerFilter, chemicalSum} from "./iotFilter"
-import {fertilizerBulk, fungicideBulk, insecticideBulk, herbicideBulk} from "../web3Handler"
+import {IoTSimulator} from "./support/iotSimulator"
+import {herbicideFilter, insecticideFilter, fungicideFilter, fertilizerFilter, chemicalSum} from "./support/iotFilter"
 
 function gen(ct) {
     const dg = new IoTSimulator(); 
@@ -28,14 +27,13 @@ function gen(ct) {
         } else if (herbSpray) {
             herbSpray = false;
             const cs = chemicalSum(currHerb);
-            herbicideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
+            console.log(cs);
             currHerb = [];
             log.push(cs)
         }
         if (herbSpray && x === ct - 1) {
             herbSpray = false;
             const cs = chemicalSum(currHerb);
-            herbicideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currHerb = [];
             log.push(cs)
         }
@@ -49,14 +47,12 @@ function gen(ct) {
         } else if (insectSpray) {
             insectSpray = false;
             const cs = chemicalSum(currInsect);
-            insecticideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currInsect = [];
             log.push(cs)
         }
         if (insectSpray && x === ct - 1) {
             insectSpray = false;
             const cs = chemicalSum(currInsect);
-            insecticideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currInsect = [];
             log.push(cs)
         }
@@ -70,14 +66,12 @@ function gen(ct) {
         } else if (fungiSpray) {
             fungiSpray = false;
             const cs = chemicalSum(currFungi);
-            fungicideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currFungi = [];
             log.push(cs)
         }
         if (fungiSpray && x === ct - 1) {
             fungiSpray = false;
             const cs = chemicalSum(currFungi);
-            fungicideBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currFungi = [];
             log.push(cs)
         }
@@ -91,31 +85,17 @@ function gen(ct) {
         } else if (useFert) {
             useFert = false;
             const cs = chemicalSum(currFert);
-            fertilizerBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currFert = [];
             log.push(cs)
         }
         if (useFert && x === ct - 1) {
             useFert = false;
             const cs = chemicalSum(currFert);
-            fertilizerBulk(cs["location"], cs["total amount"], cs["crop count"], cs["crop type"], "", cs["times run"], formatDate(new Date(cs["start time"])), formatDate(new Date(cs["end time"])));
             currFert = [];
             log.push(cs)
         }
     }
     return log
-}
-
-function formatDate(date){
-    var d = date.getDate();
-    var M = date.getMonth() + 1;
-    var y = date.getFullYear();
-    var h = date.getHours();
-    var m = date.getMonth();
-    var s = date.getSeconds();
-    var ms = date.getMilliseconds();
-
-    return "" + M + "/" + d + "/" + y + " " + h + ":" + m + ":" + s + "." + ms + "CST"
 }
 
 export{

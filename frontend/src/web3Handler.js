@@ -107,9 +107,9 @@ const abi = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
+            "internalType": "int256",
             "name": "amountUsed",
-            "type": "uint256"
+            "type": "int256"
           },
           {
             "internalType": "uint256",
@@ -147,20 +147,98 @@ const abi = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "chemicalType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "locationUsed",
+                "type": "string"
+              },
+              {
+                "internalType": "int256",
+                "name": "amountUsed",
+                "type": "int256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "cropCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "cropType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "timestamp",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "imageLink",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CropToken.Chemical",
+            "name": "chemical",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timesRun",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "startTime",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endTime",
+            "type": "string"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct CropToken.ChemicalBulk",
+        "name": "fertilizer",
+        "type": "tuple"
+      }
+    ],
+    "name": "FertilizerBulk",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "farm",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "fertilizerLimit",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "addedAmount",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "FertilizerLimit",
@@ -188,9 +266,9 @@ const abi = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
+            "internalType": "int256",
             "name": "amountUsed",
-            "type": "uint256"
+            "type": "int256"
           },
           {
             "internalType": "uint256",
@@ -228,20 +306,98 @@ const abi = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "chemicalType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "locationUsed",
+                "type": "string"
+              },
+              {
+                "internalType": "int256",
+                "name": "amountUsed",
+                "type": "int256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "cropCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "cropType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "timestamp",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "imageLink",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CropToken.Chemical",
+            "name": "chemical",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timesRun",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "startTime",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endTime",
+            "type": "string"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct CropToken.ChemicalBulk",
+        "name": "fungicide",
+        "type": "tuple"
+      }
+    ],
+    "name": "FungicideBulk",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "farm",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "fungicideLimit",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "addedAmount",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "FungicideLimit",
@@ -269,9 +425,9 @@ const abi = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
+            "internalType": "int256",
             "name": "amountUsed",
-            "type": "uint256"
+            "type": "int256"
           },
           {
             "internalType": "uint256",
@@ -309,20 +465,98 @@ const abi = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "chemicalType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "locationUsed",
+                "type": "string"
+              },
+              {
+                "internalType": "int256",
+                "name": "amountUsed",
+                "type": "int256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "cropCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "cropType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "timestamp",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "imageLink",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CropToken.Chemical",
+            "name": "chemical",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timesRun",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "startTime",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endTime",
+            "type": "string"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct CropToken.ChemicalBulk",
+        "name": "herbicide",
+        "type": "tuple"
+      }
+    ],
+    "name": "HerbicideBulk",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "farm",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "herbicideLimit",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "addedAmount",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "HerbicideLimit",
@@ -350,9 +584,9 @@ const abi = [
             "type": "string"
           },
           {
-            "internalType": "uint256",
+            "internalType": "int256",
             "name": "amountUsed",
-            "type": "uint256"
+            "type": "int256"
           },
           {
             "internalType": "uint256",
@@ -390,20 +624,98 @@ const abi = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "chemicalType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "locationUsed",
+                "type": "string"
+              },
+              {
+                "internalType": "int256",
+                "name": "amountUsed",
+                "type": "int256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "cropCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "cropType",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "timestamp",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "imageLink",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CropToken.Chemical",
+            "name": "chemical",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timesRun",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "startTime",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endTime",
+            "type": "string"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct CropToken.ChemicalBulk",
+        "name": "insecticide",
+        "type": "tuple"
+      }
+    ],
+    "name": "InsecticideBulk",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "farm",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "insecticideLimit",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "addedAmount",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "InsecticideLimit",
@@ -536,9 +848,9 @@ const abi = [
     "name": "fertilizerLimit",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "stateMutability": "view",
@@ -555,9 +867,9 @@ const abi = [
     "name": "fungicideLimit",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "stateMutability": "view",
@@ -574,9 +886,9 @@ const abi = [
     "name": "herbicideLimit",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "stateMutability": "view",
@@ -593,9 +905,28 @@ const abi = [
     "name": "insecticideLimit",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "",
-        "type": "uint256"
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "isDeployer",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "dep",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -622,9 +953,9 @@ const abi = [
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_fertilizerLimit",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "setFertilizerLimit",
@@ -646,9 +977,9 @@ const abi = [
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_fungicideLimit",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "setFungicideLimit",
@@ -670,9 +1001,9 @@ const abi = [
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_herbicideLimit",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "setHerbicideLimit",
@@ -694,9 +1025,9 @@ const abi = [
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_insecticideLimit",
-        "type": "uint256"
+        "type": "int256"
       }
     ],
     "name": "setInsecticideLimit",
@@ -773,9 +1104,9 @@ const abi = [
         "type": "string"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_amount",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "internalType": "uint256",
@@ -813,6 +1144,222 @@ const abi = [
     "inputs": [
       {
         "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "int256",
+        "name": "_amount",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_cropCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_cropType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageLink",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_timesRun",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_startTime",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_endTime",
+        "type": "string"
+      }
+    ],
+    "name": "useFertilizerBulk",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "int256",
+        "name": "_amount",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_cropCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_cropType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageLink",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_timesRun",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_startTime",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_endTime",
+        "type": "string"
+      }
+    ],
+    "name": "useFungicideBulk",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "int256",
+        "name": "_amount",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_cropCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_cropType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageLink",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_timesRun",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_startTime",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_endTime",
+        "type": "string"
+      }
+    ],
+    "name": "useHerbicideBulk",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "int256",
+        "name": "_amount",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_cropCount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_cropType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageLink",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_timesRun",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_startTime",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_endTime",
+        "type": "string"
+      }
+    ],
+    "name": "useInsecticideBulk",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
         "name": "_brand",
         "type": "string"
       },
@@ -822,9 +1369,9 @@ const abi = [
         "type": "string"
       },
       {
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "_amount",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "internalType": "uint256",
@@ -939,7 +1486,10 @@ tokenContract.events.FertilizerBulk({ fromBlock: 0 }, function (error, event) {
   .on('data', function (event) {
     const output = event.returnValues[1];
     console.log("fertilizer bulk", output);
-    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+    let dates = new Date(output.startTime);
+    let datee = new Date(output.endTime);
+    console.log(dates.toLocaleString());
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timesRun, output.startTime, output.endTime, output.chemical.imageLink)
   })
 
 tokenContract.events.FungicideBulk({ fromBlock: 0 }, function (error, event) {
@@ -948,7 +1498,7 @@ tokenContract.events.FungicideBulk({ fromBlock: 0 }, function (error, event) {
   .on('data', function (event) {
     const output = event.returnValues[1];
     console.log("fungicide bulk", output);
-    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timesRun, output.startTime, output.endTime, output.chemical.imageLink)
   })
 
 tokenContract.events.InsecticideBulk({ fromBlock: 0 }, function (error, event) {
@@ -957,7 +1507,7 @@ tokenContract.events.InsecticideBulk({ fromBlock: 0 }, function (error, event) {
   .on('data', function (event) {
     const output = event.returnValues[1];
     console.log("insecticide bulk", output);
-    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timesRun, output.startTime, output.endTime, output.chemical.imageLink)
   })
 
 tokenContract.events.HerbicideBulk({ fromBlock: 0 }, function (error, event) {
@@ -966,7 +1516,7 @@ tokenContract.events.HerbicideBulk({ fromBlock: 0 }, function (error, event) {
   .on('data', function (event) {
     const output = event.returnValues[1];
     console.log("herbicide bulk", output);
-    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timeRun, output.startTime, output.endTime, output.imageLink)
+    addBulkHistoryEntry(output.chemical.chemicalType, output.chemical.locationUsed, output.chemical.amountUsed, output.chemical.cropCount, output.chemical.cropType, output.timesRun, output.startTime, output.endTime, output.chemical.imageLink)
   })
 
 //functions
@@ -1003,7 +1553,7 @@ async function pesticide(chemical, location, amount, cropCount, cropType, imageL
 async function fertilizerBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
   try{
-    await tokenContract.methods.useFertilizerBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    await tokenContract.methods.useFertilizerBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime).send({from: accounts[0]});
     var lim = await tokenContract.methods.fertilizerLimit(accounts[0]).call();
     document.getElementById("fertilizerLimit").innerText = "Fertilizer Limit: " + lim.toString();
   } catch (e){
@@ -1013,7 +1563,7 @@ async function fertilizerBulk(location, amount, cropCount, cropType, imageLink, 
 async function fungicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
   try{
-    await tokenContract.methods.useFungicideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    await tokenContract.methods.useFungicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime).send({from: accounts[0]});
     var lim = await tokenContract.methods.fungicideLimit(accounts[0]).call();
     document.getElementById("fungicideLimit").innerText = "Fungicide Limit: " + lim.toString();
   } catch (e){
@@ -1023,7 +1573,7 @@ async function fungicideBulk(location, amount, cropCount, cropType, imageLink, t
 async function insecticideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
   try{
-    await tokenContract.methods.useInsecticideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    await tokenContract.methods.useInsecticideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime).send({from: accounts[0]});
     var lim = await tokenContract.methods.insecticideLimit(accounts[0]).call();
     document.getElementById("insecticideLimit").innerText = "Insecticide Limit: " + lim.toString();
   } catch (e){
@@ -1033,7 +1583,7 @@ async function insecticideBulk(location, amount, cropCount, cropType, imageLink,
 async function herbicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
   try{
-    await tokenContract.methods.useHerbicideBulk(location, amount, cropCount, cropType, timesRun, startTime, endTime, imageLink);
+    const x = await tokenContract.methods.useHerbicideBulk(location, amount, cropCount, cropType, imageLink, timesRun, startTime, endTime).send({from: accounts[0]});
     var lim = await tokenContract.methods.herbicideLimit(accounts[0]).call();
     document.getElementById("herbicideLimit").innerText = "Herbicide Limit: " + lim.toString();
   } catch (e){

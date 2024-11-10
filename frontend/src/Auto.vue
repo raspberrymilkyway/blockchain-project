@@ -6,6 +6,5 @@ import HelloMetamask from './components/HelloMetamask.vue';
     <main>
         <h1>Run IoT Devices</h1>
         <hello-metamask/>
-        <p id="iotOutput"></p>
     </main>
   </template>
