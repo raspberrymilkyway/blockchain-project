@@ -208,6 +208,4 @@ class IoTSimulator {
     }
 }
 
-export{
-    IoTSimulator
-}
+module.exports = {IoTSimulator}
