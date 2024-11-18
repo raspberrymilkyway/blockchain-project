@@ -37,6 +37,7 @@
             </label>
         </div>
         <button @click="handleSubmit">Submit</button>
+        <p id="chemOut"></p>
     </div>
 </template>
 
@@ -71,6 +72,7 @@ export default {
                 cropType: this.cropType,
                 imageLink: this.imageLink
             };
+            var chemOut = document.getElementById("chemOut");
 
             //there's... probably an easier way to do this
             if (this.chemical.localeCompare("") == 1 &&
@@ -93,24 +95,27 @@ export default {
                 return inputs;
             }
             else if (this.chemical.localeCompare("") == 0) {
+                chemOut.innerText = "Chemical cannot be left empty"
                 console.log("chemical empty");
             }
             else if (this.location.localeCompare("") == 0) {
+                chemOut.innerText = "Location cannot be left empty"
                 console.log("location empty");
             }
             else if (this.amount < 1) {
+                chemOut.innerText = "Amount used must be at least 1"
                 console.log("amount too low");
             }
             else if (this.cropCount < 1) {
+                chemOut.innerText = "Number of crops affected must be at least 1"
                 console.log("crop count too low");
             }
             else if (this.cropType.localeCompare("") == 0) {
+                chemOut.innerText = "Crop type cannot be left empty"
                 console.log("crop type empty");
             }
-            else if (this.imageLink.localeCompare("") == 0) {
-                console.log("image link empty");
-            }
             else {
+                chemOut.innerText = "Fields must be filled to submit data"
                 console.log("empty");
             }
         }

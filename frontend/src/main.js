@@ -3,12 +3,11 @@ import './assets/nav.css'
 import './assets/add.css'
 import './assets/history.css'
 import './web3Handler'
-import { fertilize, pesticide } from "./web3Handler"
+import { fertilize, pesticide, setLimits } from "./web3Handler"
 
 import { createApp } from 'vue'
 import History from './components/History.vue'
 import Add from "./Add.vue"
-import { addHistoryEntry } from './components/History.vue'
 
 createApp(History).mount('#history')
 createApp(Add).mount("#add")
@@ -23,4 +22,9 @@ document.addEventListener("submit", function(e){
     else{
         pesticide(e.detail.chemical, e.detail.location, e.detail.amount, e.detail.cropCount, e.detail.cropType, e.detail.imageLink);
     }
+})
+
+document.addEventListener("limits", function(e){
+    console.log('limit event')
+    setLimits(e.detail.address, e.detail.fertilizerAmt, e.detail.fungicideAmt, e.detail.herbicideAmt, e.detail.insecticideAmt);
 })

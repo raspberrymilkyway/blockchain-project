@@ -1433,6 +1433,13 @@ async function setMetamaskAddress() {
   document.getElementById("insecticideLimit").innerText = "Insecticide Limit: " + lim.toString();
   lim = await tokenContract.methods.herbicideLimit(addr).call();
   document.getElementById("herbicideLimit").innerText = "Herbicide Limit: " + lim.toString();
+
+  const dep = await tokenContract.methods.isDeployer(accounts[0]).call();
+  if (dep){
+    document.getElementById("limit").classList = [];
+  } else{
+    document.getElementById("limit").classList.add("hidden-div");
+  }
   } catch (e){
     console.error(e);
   }
@@ -1588,6 +1595,36 @@ async function herbicideBulk(location, amount, cropCount, cropType, imageLink, t
   }
 }
 
+async function setLimits(address, fertilizer, fungicide, herbicide, insecticide){
+  var added = 0
+  const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
+  try{
+    if (fertilizer > 0){
+      await tokenContract.methods.setFertilizerLimit(address, fertilizer).send({from: accounts[0]});
+    }
+    added += 1;
+    if (fungicide > 0){
+      await tokenContract.methods.setFungicideLimit(address, fungicide).send({from: accounts[0]});
+    }
+    added += 1;
+    if (herbicide > 0){
+      await tokenContract.methods.setHerbicideLimit(address, herbicide).send({from: accounts[0]});
+    }
+    added += 1;
+    if (insecticide >0){
+      await tokenContract.methods.setInsecticideLimit(address, insecticide).send({from: accounts[0]});
+    }
+    added += 1;
+    setMetamaskAddress();
+    document.getElementById("limitOut").innerText = "Successfully increases limits"
+  } catch (e){
+    const options = ["add to fertilizer limit", "add to fungicide limit", "add to herbicide limit", "add to insecticide limit", "fetch MetaMask and limit data"];
+    document.getElementById("limitOut").innerText = "Could not " + options[added];
+    console.error(e);
+    console.log(address, fertilizer, fungicide, herbicide, insecticide);
+  }
+}
+
 export{
-  fertilize, pesticide, fertilizerBulk, fungicideBulk, insecticideBulk, herbicideBulk
+  fertilize, pesticide, fertilizerBulk, fungicideBulk, insecticideBulk, herbicideBulk, setLimits
 };
