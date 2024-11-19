@@ -1526,7 +1526,7 @@ tokenContract.events.HerbicideBulk({ fromBlock: 0 }, function (error, event) {
 //functions
 async function fertilize(location, amount, cropCount, cropType, imageLink){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
-  const time = (new Date()).getTime().toString();
+  const time = new Date(Date.now());
   // console.log(time);
   try{
     await tokenContract.methods.useFertilizer("fertilizer", location, amount, cropCount, cropType, time, imageLink).send({from: accounts[0]});
@@ -1538,7 +1538,7 @@ async function fertilize(location, amount, cropCount, cropType, imageLink){
 }
 async function pesticide(chemical, location, amount, cropCount, cropType, imageLink){
   const accounts = await window.ethereum.request({ method: 'eth_accounts', params: [] });
-  const time = (new Date()).getTime().toString();
+  const time = new Date(Date.now());
   const chem = chemical[0].toUpperCase() + chemical.slice(1)
   try{
     const addr = accounts[0];
@@ -1616,7 +1616,7 @@ async function setLimits(address, fertilizer, fungicide, herbicide, insecticide)
     }
     added += 1;
     setMetamaskAddress();
-    document.getElementById("limitOut").innerText = "Successfully increases limits"
+    document.getElementById("limitOut").innerText = "Successfully increased limits"
   } catch (e){
     const options = ["add to fertilizer limit", "add to fungicide limit", "add to herbicide limit", "add to insecticide limit", "fetch MetaMask and limit data"];
     document.getElementById("limitOut").innerText = "Could not " + options[added];

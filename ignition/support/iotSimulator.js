@@ -140,7 +140,7 @@ class IoTSimulator {
 
         const ret = {
             id,
-            time: new Date().toISOString().slice(0, 23),
+            time: new Date(Date.now()),
             chemical: pesticideType,
             amount: 1, // 1 unit
             location: loc,
@@ -168,7 +168,7 @@ class IoTSimulator {
 
         const ret = {
             id,
-            time: new Date().toISOString().slice(0, 23),
+            time: new Date(Date.now()),
             chemical: "fertilizer",
             amount: 1, // 1 unit
             location: loc,

@@ -58,10 +58,22 @@ class Filters {
             "location": location,
             "crop count": cropCount,
             "crop type": cropType,
-            "start time": timeStart.toISOString().slice(0, 23), // ISO string formatted to match %m/%d/%y %H:%M:%S.%f
-            "end time": timeStop.toISOString().slice(0, 23)
+            "start time": formatDate(timeStart),
+            "end time": formatDate(timeStop)
         };
     }
+}
+
+function formatDate(date){
+    var d = date.getDate();
+    var M = date.getMonth() + 1;
+    var y = date.getFullYear();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var ms = date.getMilliseconds();
+
+    return "" + M + "/" + d + "/" + y + " " + h + ":" + m + ":" + s + "." + ms + "CST"
 }
 
 module.exports = { Filters }

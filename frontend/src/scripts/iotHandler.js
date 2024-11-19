@@ -111,7 +111,7 @@ function formatDate(date){
     var M = date.getMonth() + 1;
     var y = date.getFullYear();
     var h = date.getHours();
-    var m = date.getMonth();
+    var m = date.getMinutes();
     var s = date.getSeconds();
     var ms = date.getMilliseconds();
 
