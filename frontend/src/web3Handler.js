@@ -1542,7 +1542,7 @@ async function pesticide(chemical, location, amount, cropCount, cropType, imageL
   const chem = chemical[0].toUpperCase() + chemical.slice(1)
   try{
     const addr = accounts[0];
-    await tokenContract.methods.usePesticide(chemical, location, amount, cropCount, cropType, formateDate(time), imageLink, chem).send({from: addr});
+    await tokenContract.methods.usePesticide(chemical, location, amount, cropCount, cropType, formatDate(time), imageLink, chem).send({from: addr});
     var lim = await tokenContract.methods.fungicideLimit(addr).call();
     document.getElementById("fungicideLimit").innerText = "Fungicide Limit: " + lim.toString();
     lim = await tokenContract.methods.insecticideLimit(addr).call();
