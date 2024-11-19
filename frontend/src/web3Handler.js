@@ -1529,7 +1529,7 @@ async function fertilize(location, amount, cropCount, cropType, imageLink){
   const time = new Date(Date.now());
   // console.log(time);
   try{
-    await tokenContract.methods.useFertilizer("fertilizer", location, amount, cropCount, cropType, time, imageLink).send({from: accounts[0]});
+    await tokenContract.methods.useFertilizer("fertilizer", location, amount, cropCount, cropType, formatDate(time), imageLink).send({from: accounts[0]});
     var lim = await tokenContract.methods.fertilizerLimit(accounts[0]).call();
     document.getElementById("fertilizerLimit").innerText = "Fertilizer Limit: " + lim.toString();
   } catch (e){
@@ -1542,7 +1542,7 @@ async function pesticide(chemical, location, amount, cropCount, cropType, imageL
   const chem = chemical[0].toUpperCase() + chemical.slice(1)
   try{
     const addr = accounts[0];
-    await tokenContract.methods.usePesticide(chemical, location, amount, cropCount, cropType, time, imageLink, chem).send({from: addr});
+    await tokenContract.methods.usePesticide(chemical, location, amount, cropCount, cropType, formateDate(time), imageLink, chem).send({from: addr});
     var lim = await tokenContract.methods.fungicideLimit(addr).call();
     document.getElementById("fungicideLimit").innerText = "Fungicide Limit: " + lim.toString();
     lim = await tokenContract.methods.insecticideLimit(addr).call();
@@ -1623,6 +1623,18 @@ async function setLimits(address, fertilizer, fungicide, herbicide, insecticide)
     console.error(e);
     console.log(address, fertilizer, fungicide, herbicide, insecticide);
   }
+}
+
+function formatDate(date){
+  var d = date.getDate();
+  var M = date.getMonth() + 1;
+  var y = date.getFullYear();
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var s = date.getSeconds();
+  var ms = date.getMilliseconds();
+
+  return "" + M + "/" + d + "/" + y + " " + h + ":" + m + ":" + s + "." + ms + "CST"
 }
 
 export{
